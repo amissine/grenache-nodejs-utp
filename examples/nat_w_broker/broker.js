@@ -1,5 +1,6 @@
 'use strict'
 
+const debug = require('debug')('nat:broker')
 const { PeerRPCServer } = require('./../../')
 const Link = require('grenache-nodejs-link')
 const LRU = require('lru-cache')
@@ -20,7 +21,7 @@ service.listen()
 
 setInterval(function () {
   link.announce('fibo_broker', service.port, {})
-}, 1000)
+}, 5000)
 
 const options = { max: 500, maxAge: 1000 * 15 }
 const cache = LRU(options)
@@ -28,7 +29,7 @@ const cache = LRU(options)
 service.on('request', (rid, key, payload, handler, cert, additional) => {
   // in the additional variable we get the external IP and port of the sender,
   // which we will use for our "holepunch registry"
-  console.log(`got reply from to ${additional.address}:${additional.port}`)
+  debug(`got reply from to ${additional.address}:${additional.port}`)
 
   payload.address = additional.address
   payload.port = additional.port
@@ -42,7 +43,7 @@ service.on('request', (rid, key, payload, handler, cert, additional) => {
     res.fibonacci_worker[k] = v
   })
 
-  console.log('#services', JSON.stringify(res, null, ' '))
+  debug('#services', JSON.stringify(res, null, ' '))
 
   handler.reply(null, res)
 })
