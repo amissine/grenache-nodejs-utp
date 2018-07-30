@@ -20,6 +20,7 @@ const service = peer.transport('server')
 service.listen()
 
 setInterval(function () {
+  debug('announcing service fibo_broker on service.port=%d', service.port)
   link.announce('fibo_broker', service.port, {})
 }, 5000)
 
