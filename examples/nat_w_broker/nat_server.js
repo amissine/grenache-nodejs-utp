@@ -11,12 +11,10 @@ const link = new Link({
 })
 link.start()
 
-const peer = new PeerRPCServer(link, {
-  timeout: 300000
-})
+const peer = new PeerRPCServer(link, { port: 50001, timeout: 300000 })
 peer.init()
 
-const service = peer.transport('server', { port: 50001 })
+const service = peer.transport('server')
 service.listen()
 
 const peerClient = new PeerRPCClient(link, {})
