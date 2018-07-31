@@ -1,7 +1,9 @@
 'use strict'
 
+const debug = require('debug')('nat:register')
 exports.register = register
 function register (peer, isServer, cb) {
+  debug('isServer=%s peer=%O', isServer, peer)
   peer.request('fibo_broker', {
     service: 'fibonacci_worker',
     server: isServer
