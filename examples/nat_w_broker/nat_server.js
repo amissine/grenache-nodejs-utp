@@ -30,9 +30,10 @@ setInterval(function () {
   register(peerClient, true, (err, res) => {
     if (err) return debug('err=%O', err)
 
+    debug(res)
     connect(peerClient, res)
   })
-}, 2000)
+}, 6000)
 
 function connect (peer, clients) {
   if (!clients) return
