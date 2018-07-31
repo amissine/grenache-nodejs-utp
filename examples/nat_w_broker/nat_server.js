@@ -16,7 +16,7 @@ const peer = new PeerRPCServer(link, {
 })
 peer.init()
 
-const service = peer.transport('server')
+const service = peer.transport('server', { port: 50001 })
 service.listen()
 
 const peerClient = new PeerRPCClient(link, {})
