@@ -3,12 +3,15 @@
 const debug = require('debug')('nat:register')
 exports.register = register
 function register (peer, isServer, cb) {
-  debug('isServer=%s peer=%O', isServer, peer)
+  debug('isServer=%s peer.link.conf.grape=%s', isServer, peer.link.conf.grape)
   peer.request('fibo_broker', {
     service: 'fibonacci_worker',
     server: isServer
   }, { timeout: 10000 }, (err, data) => {
-    if (err) return cb(err)
+    if (err) {
+      debug(err)
+      return cb(err)
+    }
 
     const pool = Object.keys(data['fibonacci_worker'])
 

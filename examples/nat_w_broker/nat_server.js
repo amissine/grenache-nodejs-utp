@@ -1,5 +1,6 @@
 'use strict'
 
+const debug = require('debug')('nat:nat_server')
 const { PeerRPCServer, PeerRPCClient } = require('./../../')
 const Link = require('grenache-nodejs-link')
 
@@ -27,10 +28,7 @@ setInterval(function () {
   link.announce('fibonacci_worker', service.port, {})
 
   register(peerClient, true, (err, res) => {
-    if (err) {
-      console.error(err)
-      return
-    }
+    if (err) return debug('err=%O', err)
 
     connect(peerClient, res)
   })
