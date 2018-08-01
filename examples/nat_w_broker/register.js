@@ -13,6 +13,7 @@ function register (peer, isServer, cb) {
       return cb(err)
     }
 
+    debug(data)
     const pool = Object.keys(data['fibonacci_worker'])
 
     const clients = pool.filter((el) => {

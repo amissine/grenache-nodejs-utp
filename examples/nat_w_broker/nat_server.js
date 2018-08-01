@@ -20,7 +20,7 @@ service.listen()
 const peerClient = new PeerRPCClient(link, {})
 peerClient.init()
 
-console.log('listening on', service.port)
+debug('listening on port %d', service.port)
 
 setInterval(function () {
   link.announce('fibonacci_worker', service.port, {})
