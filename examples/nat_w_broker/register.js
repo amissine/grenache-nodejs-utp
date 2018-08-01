@@ -15,6 +15,7 @@ function register (peer, isServer, cb) {
 
     debug(data)
     const pool = Object.keys(data['fibonacci_worker'])
+    debug(pool)
 
     const clients = pool.filter((el) => {
       const tmp = data['fibonacci_worker'][el]
@@ -26,6 +27,7 @@ function register (peer, isServer, cb) {
 
       return !tmp.server
     })
+    debug(clients)
 
     const res = clients.map((el) => {
       return data['fibonacci_worker'][el]

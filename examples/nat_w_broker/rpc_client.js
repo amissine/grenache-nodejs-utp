@@ -1,5 +1,6 @@
 'use strict'
 
+const debug = require('debug')('nat:rpc_client')
 const { PeerRPCClient } = require('./../../')
 const Link = require('grenache-nodejs-link')
 
@@ -35,6 +36,8 @@ function kick () {
     if (err) {
       console.error(err)
     }
+
+    debug(res)
   })
 }
 
