@@ -10,7 +10,7 @@ const link = new Link({
 })
 link.start()
 
-const peer = new PeerRPCClient(link, {})
+const peer = new PeerRPCClient(link, { port: 50002 })
 peer.init()
 
 const service = peer.transport('client', {})
